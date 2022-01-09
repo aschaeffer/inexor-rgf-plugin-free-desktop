@@ -1,0 +1,26 @@
+query {
+  instances {
+    desktop_entries: entities(entityType: "desktop_entry") {
+      id
+      properties(
+        names: [
+          "name",
+          "appid",
+          "source",
+          "path",
+          "categories",
+          "groups",
+          "exec",
+          "icon",
+          "type",
+          "comment",
+          "keywords",
+          "mime_type",
+          "terminal",
+          "no_display",
+          "startup_notify"
+        ]
+      )
+    }
+  }
+}
