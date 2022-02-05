@@ -1,12 +1,12 @@
 use std::fs;
 use std::sync::{Arc, RwLock};
 
+use crate::di::*;
 use crate::model::EntityInstance;
 use async_trait::async_trait;
 use freedesktop_desktop_entry::{default_paths, DesktopEntry, Iter, PathSource};
 use serde_json::json;
 use uuid::Uuid;
-use waiter_di::*;
 
 use crate::api::{DesktopEntryManager, DESKTOP_ENTRY, NAMESPACE_DESKTOP_ENTRY};
 use crate::builder::EntityInstanceBuilder;

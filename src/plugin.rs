@@ -1,7 +1,7 @@
 use std::sync::{Arc, RwLock};
 
+use crate::di::*;
 use async_trait::async_trait;
-use waiter_di::*;
 
 use crate::api::DesktopEntryManager;
 use crate::plugins::plugin::PluginMetadata;
