@@ -1,6 +1,6 @@
 query {
   instances {
-    desktop_entries: entities(entityType: "desktop_entry") {
+    desktop_entries: entities(type: "desktop_entry") {
       id
       properties(
         names: [
@@ -20,7 +20,10 @@ query {
           "no_display",
           "startup_notify"
         ]
-      )
+      ) {
+        name
+        value
+      }
     }
   }
 }
