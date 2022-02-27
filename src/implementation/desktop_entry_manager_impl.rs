@@ -18,7 +18,7 @@ pub struct PluginContextContainer(RwLock<Option<std::sync::Arc<dyn PluginContext
 
 #[provides]
 fn create_empty_plugin_context_container() -> PluginContextContainer {
-    return PluginContextContainer(RwLock::new(None));
+    PluginContextContainer(RwLock::new(None))
 }
 
 #[component]
@@ -59,14 +59,14 @@ impl DesktopEntryManager for DesktopEntryManagerImpl {
     }
 
     fn create_desktop_entry(&self, path_src: PathSource, desktop_entry: DesktopEntry) -> EntityInstance {
-        let name = desktop_entry.name(None).map_or(String::new(), |s| String::from(s));
-        let comment = desktop_entry.comment(None).map_or(String::new(), |s| String::from(s));
+        let name = desktop_entry.name(None).map_or(String::new(), String::from);
+        let comment = desktop_entry.comment(None).map_or(String::new(), String::from);
         let keywords = desktop_entry
             .comment(None)
-            .map_or(String::new(), |s| String::from(s))
-            .split(";")
+            .map_or(String::new(), String::from)
+            .split(';')
             .into_iter()
-            .map(|s| String::from(s))
+            .map(String::from)
             .collect::<Vec<_>>();
         // let groups = desktop_entry
         //     .groups
@@ -75,11 +75,11 @@ impl DesktopEntryManager for DesktopEntryManagerImpl {
         //     .collect::<HashMap<String, HashMap<String, _>>>();
         let categories = desktop_entry
             .categories()
-            .map_or(String::new(), |s| String::from(s))
-            .split(";")
+            .map_or(String::new(), String::from)
+            .split(';')
             .into_iter()
-            .filter(|s| *s != "")
-            .map(|s| String::from(s))
+            .filter(|s| s.is_empty())
+            .map(String::from)
             .collect::<Vec<_>>();
         EntityInstanceBuilder::new(DESKTOP_ENTRY)
             .id(Uuid::new_v5(&NAMESPACE_DESKTOP_ENTRY, desktop_entry.appid.as_bytes()))
